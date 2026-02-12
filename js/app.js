@@ -40,15 +40,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----- Populate selects -----
   function populateWorkouts(){
-    modeSelect.innerHTML = "";
-    for(const w of window.WORKOUTS){
-      const opt = document.createElement("option");
-      opt.value = w.id;
-      opt.textContent = w.label;
-      opt.dataset.cat = w.cat || "default";
-      modeSelect.appendChild(opt);
-    }
+  modeSelect.innerHTML = "";
+
+  if (!Array.isArray(window.WORKOUTS)) return;
+
+  // Group workouts by category
+  const groups = {};
+
+  for (const w of WORKOUTS) {
+    if (!groups[w.cat]) groups[w.cat] = [];
+    groups[w.cat].push(w);
   }
+
+  // Sort categories alphabetically
+  const sortedCats = Object.keys(groups).sort((a, b) =>
+    a.localeCompare(b)
+  );
+
+  for (const cat of sortedCats) {
+
+    // Sort workouts inside category alphabetically by label
+    groups[cat].sort((a, b) =>
+      a.label.localeCompare(b.label)
+    );
+
+    const optgroup = document.createElement("optgroup");
+
+    // Capitalize category name nicely
+    optgroup.label = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+    for (const workout of groups[cat]) {
+      const opt = document.createElement("option");
+      opt.value = workout.id;
+      opt.textContent = workout.label;
+      opt.dataset.cat = workout.cat;
+      optgroup.appendChild(opt);
+    }
+
+    modeSelect.appendChild(optgroup);
+  }
+}
+
 
   function populateSnacks(){
     // keep the placeholder option
