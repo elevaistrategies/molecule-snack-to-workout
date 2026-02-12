@@ -188,17 +188,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const rate = caloriesPerMinute(w.met, weight);
-    const mins = cal / rate;
+const mins = cal / rate;
 
-    // After you calculate: const mins = cal / rate;
+const brutal = !!brutalToggle?.checked;
+const hybrid = !!hybridToggle?.checked;
 
-const brutal = brutalToggle.checked;
-
-// Optional “real-world” adjustment (fatigue/rest) ONLY in Brutal Mode:
+// “Brutal” behavior: adjust time + varied feedback text
 const minsAdjusted = brutal ? mins * 1.15 : mins;
 
 let headline = `${Math.round(cal)} kcal ≈ ${fmtTime(minsAdjusted)} of ${w.label}`;
-let sub = `MET estimate • Weight: ${Math.round(weight)} lbs • Burn rate ≈ ${rate.toFixed(1)} kcal/min`;
+let sub = `MET estimate • Weight: ${Math.round(weight)} lbs • Burn ≈ ${rate.toFixed(1)} kcal/min`;
 
 if (brutal) {
   const brutalLine = window.BrutalMode?.getBrutalLine?.({
@@ -216,35 +215,29 @@ if (brutal) {
     mins,
     minsAdjusted,
     burnRate: rate,
-  }) || "Same math, spicier tone.";
+  }) || "Real-world factor applied (fatigue/rest).";
 
-  sub = `${brutalLine} • ${contextLine}`;
+  sub = `${brutalLine} • ${contextLine} • Burn ≈ ${rate.toFixed(1)} kcal/min`;
 }
 
-    const hybrid = !!hybridToggle?.checked;
+let extra = "";
+if (hybrid) {
+  const plan = hybridPlan(minsAdjusted);
+  extra = `
+    <div class="small" style="margin-top:.55rem;"><strong>Hybrid “Erase It” Plan</strong> (a mini-session split)</div>
+    <div class="small">• ${fmtTime(plan[0].min)} — ${plan[0].label}</div>
+    <div class="small">• ${fmtTime(plan[1].min)} — ${plan[1].label}</div>
+    <div class="small">• ${fmtTime(plan[2].min)} — ${plan[2].label}</div>
+  `;
+}
 
-    const headline = `${Math.round(cal)} kcal ≈ ${fmtTime(mins)} of ${w.label}`;
-    const sub = brutal
-      ? `Brutal Mode is just wording. Math is unchanged. Burn ≈ ${rate.toFixed(1)} kcal/min 😈`
-      : `MET estimate • Weight: ${Math.round(weight)} lbs • Burn ≈ ${rate.toFixed(1)} kcal/min`;
+out.innerHTML = `
+  <div class="kpi">${headline}</div>
+  <div class="small">${sub}</div>
+  ${extra}
+`;
 
-    let extra = "";
-    if(hybrid){
-      const plan = hybridPlan(mins);
-      extra = `
-        <div class="small" style="margin-top:.55rem;"><strong>Hybrid “Erase It” Plan</strong> (a mini-session split)</div>
-        <div class="small">• ${fmtTime(plan[0].min)} — ${plan[0].label}</div>
-        <div class="small">• ${fmtTime(plan[1].min)} — ${plan[1].label}</div>
-        <div class="small">• ${fmtTime(plan[2].min)} — ${plan[2].label}</div>
-      `;
-    }
+updateStats(cal);
 
-    out.innerHTML = `
-      <div class="kpi">${headline}</div>
-      <div class="small">${sub}</div>
-      ${extra}
-    `;
-
-    updateStats(cal);
   });
 });
