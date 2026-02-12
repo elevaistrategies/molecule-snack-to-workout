@@ -53,6 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   modeSelect.innerHTML = "";
 
+  modeSelect.innerHTML = "";
+
   if (!Array.isArray(window.WORKOUTS)) return;
 
   // Group workouts by category
@@ -83,6 +85,13 @@ header.value = "";
 header.className = "catHeader";
 modeSelect.appendChild(header);
 
+// Add the actual workout options under it
+for (const workout of groups[cat]) {
+  const opt = document.createElement("option");
+  opt.value = workout.id;
+  opt.textContent = "   " + workout.label;
+  opt.dataset.cat = workout.cat;
+  modeSelect.appendChild(opt);
 }
 
 
