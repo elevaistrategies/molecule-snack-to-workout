@@ -65,7 +65,7 @@
         <div class="toggle">
           <input type="checkbox" id="hybrid" />
           <label for="hybrid">Hybrid “Erase It” Plan 🧪</label>
-          <div class="muted">Splits effort into a mini session.</div>
+          <div class="muted"><strong>Hybrid Plan</strong> splits the total time into HIIT + strength + mobility—like a mini session recipe.</div>
         </div>
       </div>
 
@@ -73,7 +73,28 @@
 
       <div class="result" id="out">
         <div class="muted">Enter calories (or pick a snack) and hit Convert.</div>
+        <div class="muted" id="hint" style="margin-top:.5rem;display:none;">If you click Convert and nothing happens, open the browser console (F12) and look for errors.</div>
       </div>
+
+      
+      <details class="how">
+        <summary>How this works (simple)</summary>
+        <div class="howBody">
+          <p><strong>Step 1:</strong> You enter snack calories (or pick a preset).</p>
+          <p><strong>Step 2:</strong> You enter your bodyweight. We use it to estimate burn rate.</p>
+          <p><strong>Step 3:</strong> We use a standard intensity value (MET) for the workout you chose to estimate <em>calories per minute</em>.</p>
+          <p><strong>Result:</strong> time = calories ÷ burn-rate.</p>
+          <p class="howNote">These are estimates. Real burn changes with effort, rest breaks, terrain, fitness, and the fact that humans are chaotic. 🧠⚡</p>
+        </div>
+      </details>
+
+      <details class="how">
+        <summary>What “Brutal Mode” and “Hybrid Plan” mean</summary>
+        <div class="howBody">
+          <p><strong>Brutal Mode 😈</strong> changes the wording only. The calculation stays the same.</p>
+          <p><strong>Hybrid “Erase It” Plan 🧪</strong> takes the total time and splits it into a mini-session: HIIT + strength + mobility. It’s not a prescription—just a structured way to attack the snack.</p>
+        </div>
+      </details>
 
       <div class="streak" id="streak"></div>
     </div>
