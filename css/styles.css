@@ -200,3 +200,5 @@ footer{
   from{ transform: rotate(0deg); }
   to{ transform: rotate(360deg); }
 }
+
+.how + .how{ margin-top:.7rem; }
