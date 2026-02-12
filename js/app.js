@@ -77,18 +77,23 @@ document.addEventListener("DOMContentLoaded", () => {
       a.label.localeCompare(b.label)
     );
 
-    const optgroup = document.createElement("optgroup");
+    // Add a non-clickable header option
+const header = document.createElement("option");
+header.textContent = CATEGORY_LABELS[cat] || cat;
+header.disabled = true;
+header.value = "";
+header.className = "catHeader";
+modeSelect.appendChild(header);
 
-    // Capitalize category name nicely
-    optgroup.label = CATEGORY_LABELS[cat] || cat;
+// Add the actual workout options under it
+for (const workout of groups[cat]) {
+  const opt = document.createElement("option");
+  opt.value = workout.id;
+  opt.textContent = "   " + workout.label;
+  opt.dataset.cat = workout.cat;
+  modeSelect.appendChild(opt);
+}
 
-    for (const workout of groups[cat]) {
-      const opt = document.createElement("option");
-      opt.value = workout.id;
-      opt.textContent = workout.label;
-      opt.dataset.cat = workout.cat;
-      optgroup.appendChild(opt);
-    }
 
 // Add a non-clickable header option for the category (visual divider)
 const header = document.createElement("option");
