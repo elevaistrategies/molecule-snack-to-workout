@@ -203,23 +203,6 @@ footer{
 
 .how + .how{ margin-top:.7rem; }
 
-/* Workout Category Styling */
-select optgroup {
-  font-weight: 900;
-  color: var(--accent2);
-  background: #0f1520;
-}
-
-select option {
-  font-weight: 500;
-}
-
-/* Make category headers stand out (works in many browsers) */
-select optgroup {
-  font-weight: 950;
-  color: var(--accent2);
-  background: rgba(167, 139, 250, 0.08);
-}
 
 /* Make regular options look normal */
 select option {
