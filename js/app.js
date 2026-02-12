@@ -90,7 +90,21 @@ document.addEventListener("DOMContentLoaded", () => {
       optgroup.appendChild(opt);
     }
 
-    modeSelect.appendChild(optgroup);
+// Add a non-clickable header option for the category (visual divider)
+const header = document.createElement("option");
+header.textContent = CATEGORY_LABELS[cat] || cat;
+header.disabled = true;
+header.value = "";
+header.className = "catHeader";
+modeSelect.appendChild(header);
+
+// Add the actual workout options under it
+for (const workout of groups[cat]) {
+  const opt = document.createElement("option");
+  opt.value = workout.id;
+  opt.textContent = "   " + workout.label; // indent
+  opt.dataset.cat = workout.cat;
+  modeSelect.appendChild(opt);
   }
 }
 
