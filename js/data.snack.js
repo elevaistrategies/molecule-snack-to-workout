@@ -1,5 +1,5 @@
 // Snack presets (expand freely). Keep it light, keep it funny.
-const SNACKS = [
+window.SNACKS = [
   { id:"donut",   name:"Glazed Donut 🍩", cal:260 },
   { id:"bigmac",  name:"Big Mac 🍔", cal:550 },
   { id:"fries",   name:"Large Fries 🍟", cal:510 },
