@@ -39,7 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----- Populate selects -----
-  function populateWorkouts(){
+ function populateWorkouts(){
+
+  const CATEGORY_LABELS = {
+    combat: "🥊 Combat",
+    endurance: "🏃 Endurance",
+    functional: "🧱 Functional",
+    hiit: "🔥 HIIT",
+    recovery: "🧘 Recovery",
+    sport: "🏀 Sport",
+    strength: "🏋️ Strength",
+  };
+
+  modeSelect.innerHTML = "";
+
   modeSelect.innerHTML = "";
 
   if (!Array.isArray(window.WORKOUTS)) return;
@@ -67,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const optgroup = document.createElement("optgroup");
 
     // Capitalize category name nicely
-    optgroup.label = cat.charAt(0).toUpperCase() + cat.slice(1);
+    optgroup.label = CATEGORY_LABELS[cat] || cat;
 
     for (const workout of groups[cat]) {
       const opt = document.createElement("option");
