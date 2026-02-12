@@ -7,6 +7,17 @@
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
+  <!-- Ambient layer -->
+  <div class="fx" aria-hidden="true">
+    <canvas id="fxCanvas"></canvas>
+    <div class="reactor" id="reactor">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+      <div class="core"></div>
+    </div>
+  </div>
+
   <header>
     <h1>Snack → Workout Converter</h1>
     <p>Fuel in. Effort out. Physics doesn’t negotiate. 🔥</p>
@@ -16,42 +27,65 @@
     <div class="card">
       <div class="row">
         <div>
-          <label>Snack calories</label>
-          <input id="cal" type="number" min="0" placeholder="e.g., 350" />
+          <label for="snackPreset">Snack preset (optional)</label>
+          <select id="snackPreset">
+            <option value="">— choose a snack —</option>
+          </select>
+          <div class="muted">Pick a preset or type calories manually.</div>
         </div>
 
         <div>
-          <label>Bodyweight (lbs)</label>
-          <input id="weight" type="number" min="0" placeholder="e.g., 180" />
+          <label for="cal">Snack calories</label>
+          <input id="cal" type="number" min="0" placeholder="e.g., 350" />
+          <div class="muted">Tip: the nutrition label is more honest than your inner narrator.</div>
         </div>
       </div>
 
       <div class="row">
         <div>
-          <label>Workout type</label>
-          <select id="mode"></select>
+          <label for="weight">Bodyweight (lbs)</label>
+          <input id="weight" type="number" min="0" placeholder="e.g., 180" />
+          <div class="muted">Used for MET-based estimates.</div>
         </div>
 
-        <div class="toggle-wrap">
-          <label>Brutal Mode 😈</label>
+        <div>
+          <label for="mode">Workout type</label>
+          <select id="mode"></select>
+          <div class="muted">Changes theme + estimate. Your body is not a spreadsheet… but we try.</div>
+        </div>
+      </div>
+
+      <div class="row tight">
+        <div class="toggle">
           <input type="checkbox" id="brutal" />
+          <label for="brutal">Brutal Mode 😈</label>
+          <div class="muted">For when you want honesty with teeth.</div>
+        </div>
+
+        <div class="toggle">
+          <input type="checkbox" id="hybrid" />
+          <label for="hybrid">Hybrid “Erase It” Plan 🧪</label>
+          <div class="muted">Splits effort into a mini session.</div>
         </div>
       </div>
 
       <button id="go">Convert</button>
 
       <div class="result" id="out">
-        Enter your snack and face the consequences.
+        <div class="muted">Enter calories (or pick a snack) and hit Convert.</div>
       </div>
+
+      <div class="streak" id="streak"></div>
     </div>
   </main>
 
   <footer>
-    Built as a molecule in ElevAI Labs • Estimates only
+    Built as a molecule in ElevAI Labs • estimates only • <span id="version"></span>
   </footer>
 
   <script src="./js/data.workouts.js"></script>
   <script src="./js/data.snacks.js"></script>
+  <script src="./js/ui.animations.js"></script>
   <script src="./js/app.js"></script>
 </body>
 </html>
