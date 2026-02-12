@@ -1,6 +1,6 @@
 // Workout library (MET values) + category for theming.
 // MET values generally align with the Compendium of Physical Activities (approximate ranges).
-const WORKOUTS = [
+window.WORKOUTS = [
   // Endurance
   { id:"run6",  label:"Running (6 mph / 10-min mile)", met:9.8,  cat:"endurance" },
   { id:"run8",  label:"Running (8 mph / 7.5-min mile)", met:11.8, cat:"endurance" },
