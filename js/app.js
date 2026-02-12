@@ -190,7 +190,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const rate = caloriesPerMinute(w.met, weight);
     const mins = cal / rate;
 
-    const brutal = !!brutalToggle?.checked;
+    // After you calculate: const mins = cal / rate;
+
+const brutal = brutalToggle.checked;
+
+// Optional “real-world” adjustment (fatigue/rest) ONLY in Brutal Mode:
+const minsAdjusted = brutal ? mins * 1.15 : mins;
+
+let headline = `${Math.round(cal)} kcal ≈ ${fmtTime(minsAdjusted)} of ${w.label}`;
+let sub = `MET estimate • Weight: ${Math.round(weight)} lbs • Burn rate ≈ ${rate.toFixed(1)} kcal/min`;
+
+if (brutal) {
+  const brutalLine = window.BrutalMode?.getBrutalLine?.({
+    cal,
+    mins,
+    minsAdjusted,
+    workoutLabel: w.label,
+    burnRate: rate,
+    weightLbs: weight,
+    category: w.cat,
+  }) || "No shortcuts. Lace up. 😈";
+
+  const contextLine = window.BrutalMode?.getBrutalContextLine?.({
+    cal,
+    mins,
+    minsAdjusted,
+    burnRate: rate,
+  }) || "Same math, spicier tone.";
+
+  sub = `${brutalLine} • ${contextLine}`;
+}
+
     const hybrid = !!hybridToggle?.checked;
 
     const headline = `${Math.round(cal)} kcal ≈ ${fmtTime(mins)} of ${w.label}`;
