@@ -3,6 +3,14 @@
 
 (function(){
   const canvas = document.getElementById("fxCanvas");
+  if(!canvas){
+    // If FX layer is removed, don't break the app.
+    window.UIFX = {
+      setTheme: () => {},
+      setReactorIntensity: () => {}
+    };
+    return;
+  }
   const ctx = canvas.getContext("2d", { alpha:true });
   let w=0,h=0, dpr=1;
   const orbs = [];
