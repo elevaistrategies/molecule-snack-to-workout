@@ -12,6 +12,28 @@
   --glow2: 0 0 30px rgba(167,139,250,.18);
   --shadow: 0 14px 40px rgba(0,0,0,.45);
 }
+:root[data-theme="dark"]{
+  --bg: #070912;
+  --panel: rgba(255,255,255,0.06);
+  --text: rgba(255,255,255,0.92);
+  --stroke: rgba(255,255,255,0.12);
+}
+
+:root[data-theme="light"]{
+  --bg: #f7f8ff;
+  --panel: rgba(10,12,22,0.06);
+  --text: rgba(10,12,22,0.92);
+  --stroke: rgba(10,12,22,0.12);
+}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+}
+.card{
+  background: var(--panel);
+  border-color: var(--stroke);
+}
 
 /* ===== Base ===== */
 *{box-sizing:border-box}
