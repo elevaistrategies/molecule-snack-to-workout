@@ -49,7 +49,97 @@ body{
   overflow-x:hidden;
 }
 
-header{
+/* ===== Topbar (shared Labs nav) ===== */
+.topbar{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 3;
+}
+
+.topbar__actions{
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+/* Brand (🧪 + title) */
+.brand{
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+}
+
+.brand__mark{
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel, rgba(255,255,255,0.06)) 80%, transparent 20%);
+  box-shadow: 0 0 22px rgba(125,211,252,.18);
+}
+
+.brand__title{
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+/* Action pills */
+.chip{
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .62rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--panel, rgba(255,255,255,0.06)) 82%, transparent 18%);
+  color: var(--text);
+  font-weight: 750;
+  font-size: .95rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+
+.chip--ghost{
+  background: color-mix(in oklab, var(--panel, rgba(255,255,255,0.06)) 72%, transparent 28%);
+}
+
+.chip:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0,0,0,.16);
+  border-color: color-mix(in oklab, var(--stroke) 60%, rgba(125,211,252,.35) 40%);
+}
+
+.chip:active{ transform: translateY(0px); }
+
+.chip:focus-visible,
+.brand:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.18), 0 0 22px rgba(255,255,255,0.12), var(--glow);
+  border-radius: 999px;
+}
+
+/* Small screens: keep topbar readable */
+@media (max-width: 560px){
+  .topbar{ padding: .9rem 1rem 0.15rem; }
+  .brand__title{ display:none; }
+  .chip__label{ display:none; }
+  .chip{ padding: .62rem .78rem; }
+}
+
+
+.hero{
   position:relative;
   max-width:900px;
   margin:0 auto;
@@ -98,8 +188,8 @@ input,select{
   padding:.78rem .9rem;
   border-radius:12px;
   border:1px solid var(--stroke);
-  background: color-mix(in oklab, #0f1520 92%, black 8%);
-  color:var(--fg);
+  background: color-mix(in oklab, var(--bg) 92%, black 8%);
+  color: var(--text);
   outline:none;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
 }
