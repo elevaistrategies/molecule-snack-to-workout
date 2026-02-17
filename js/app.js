@@ -14,6 +14,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const versionEl = document.getElementById("version");
   const goBtn = document.getElementById("go");
 
+    // ----- Topbar: Theme toggle -----
+  const btnTheme = document.getElementById("btnTheme");
+
+  function getSavedTheme() {
+    try {
+      return localStorage.getItem("labs_theme") || "";
+    } catch {
+      return "";
+    }
+  }
+
+  function saveTheme(t) {
+    try {
+      localStorage.setItem("labs_theme", t);
+    } catch {}
+  }
+
+  function applyTheme(t) {
+    // This expects CSS to react to [data-theme="light"|"dark"] (we’ll handle that below)
+    document.documentElement.dataset.theme = (t === "light") ? "light" : "dark";
+  }
+
+  // boot theme
+  const initialTheme = getSavedTheme() || (document.documentElement.dataset.theme || "dark");
+  applyTheme(initialTheme);
+
+  if (btnTheme) {
+    btnTheme.addEventListener("click", () => {
+      const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+      const next = current === "light" ? "dark" : "light";
+      applyTheme(next);
+      saveTheme(next);
+    });
+  }
+
+
   if (versionEl) versionEl.textContent = "v3";
 
   // If something critical is missing, fail loudly (friendly).
